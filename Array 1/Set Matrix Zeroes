@@ -1,0 +1,22 @@
+'''
+https://leetcode.com/problems/set-matrix-zeroes/
+'''
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        row=len(matrix)
+        col=len(matrix[0])
+        vis=[[-1 for i in range(col)]for j in range(row)]
+        for i in range(row):
+            for j in range(col):
+                if vis[i][j]==-1 and matrix[i][j]==0:
+                    for k in range(col):
+                        if vis[i][k]==-1 and matrix[i][k]!=0:
+                            matrix[i][k]=0
+                            vis[i][k]=0
+                    for m in range(row):
+                        if vis[m][j]==-1 and matrix[m][j]!=0:
+                            matrix[m][j]=0
+                            vis[m][j]=0
