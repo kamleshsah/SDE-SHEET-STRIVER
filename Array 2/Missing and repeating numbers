@@ -1,0 +1,16 @@
+'''
+https://www.codingninjas.com/codestudio/problems/873366?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=1
+'''
+
+def missingAndRepeating(arr, n):
+    # Write your code here
+    s=n*(n+1)//2
+    p=n*(n+1)*(2*n+1)//6
+    
+    for i in range(n):
+        s-=arr[i]
+        p-=arr[i]*arr[i]
+    
+    missing_val = (s+ p//s)//2
+    repeat = missing_val-s
+    return missing_val,repeat
