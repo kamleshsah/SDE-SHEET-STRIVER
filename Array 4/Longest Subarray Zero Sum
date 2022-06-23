@@ -1,0 +1,35 @@
+'''
+https://www.codingninjas.com/codestudio/problems/920321?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+'''
+**** Brute Force ***** TC : O(N**2)
+
+def LongestSubsetWithZeroSum(arr):
+    ans=[]
+    for i in range(len(arr)):
+        summ=arr[i]
+        if summ==0:
+            ans.append(1)
+        for j in range(i+1,len(arr)):
+            summ+=arr[j]
+            if summ==0:
+                ans.append(j-i+1)
+    if len(ans)==0:
+        return 0
+    return max(ans)
+    
+    
+**** Optimised **** TC : O(N)
+
+def LongestSubsetWithZeroSum(arr):
+    d={}
+    summ=0;maxx=0
+    for i in range(len(arr)):
+        summ+=arr[i]
+        if summ==0:
+            maxx=max(maxx,i+1)
+        elif summ in d:
+            maxx=max(maxx,i-d[summ])
+        else:
+            d[summ]=i
+    return maxx
+
