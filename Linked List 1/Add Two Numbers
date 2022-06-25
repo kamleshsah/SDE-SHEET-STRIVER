@@ -1,0 +1,34 @@
+'''
+https://leetcode.com/problems/add-two-numbers/submissions/
+'''
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        carry=0
+        head=None
+        while l1 is not None or l2 is not None:
+            x=0
+            if l1 is not None:
+                x+=l1.val
+                l1 = l1.next
+            if l2 is not None:
+                x+=l2.val
+                l2 = l2.next
+            x+=carry
+            if x>9:
+                x = x%10
+                carry = 1
+            else:
+                carry = 0
+            if head is None:
+                head=ListNode(x)
+                curr=head
+            else:
+                n=ListNode(x)
+                curr.next=n
+                curr=curr.next
+                
+        if carry==1:
+            n=ListNode(1)
+            curr.next=n
+        return head
