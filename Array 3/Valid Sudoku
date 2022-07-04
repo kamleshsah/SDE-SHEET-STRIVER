@@ -1,0 +1,33 @@
+'''
+https://leetcode.com/problems/valid-sudoku/
+'''
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        n=len(board)
+        row=[{} for i in range(n)]
+        col=[{} for i in range(n)]
+        block=[{} for i in range(n)]
+        
+        def get_block(i,j):
+            return 3*(i//3)+j//3
+        
+        for i in range(n):
+            for j in range(n):
+                val=board[i][j]
+                if val==".":
+                    continue
+                else:
+                    k=get_block(i,j)
+                    row[i][val]=row[i].get(val,0)+1
+                    col[j][val]=col[j].get(val,0)+1
+                    block[k][val]=block[k].get(val,0)+1
+        for i in range(n):
+            for j in range(n):
+                val=board[i][j]
+                if val==".":
+                    continue
+                k=get_block(i,j)
+                if row[i][val]>1 or col[j][val]>1 or block[k][val]>1:
+                    return False
+        return True
