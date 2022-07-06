@@ -1,0 +1,23 @@
+'''
+https://leetcode.com/problems/maximum-product-subarray/submissions/
+'''
+class Solution:
+    import sys
+    def maxProduct(self, nums: List[int]) -> int:
+        ans=-sys.maxsize
+        x=1
+        flag=True
+        for i in range(len(nums)):
+            x*=nums[i]
+            if x>ans:
+                ans=x
+            if x==0:
+                x=1
+        x=1
+        for i in range(len(nums)-1,-1,-1):
+            x*=nums[i]
+            if x>ans:
+                ans=x
+            if x==0:
+                x=1
+        return ans
