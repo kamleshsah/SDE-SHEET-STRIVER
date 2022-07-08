@@ -1,0 +1,48 @@
+'''
+https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1/#
+'''
+
+def inversionCount(self, arr, n):
+        def merge(arr,temp,low,mid,high):
+            cnt=0
+            i=low;j=mid;k=low;cnt=0
+            while i<=mid-1 and j<=high:
+                if arr[i]<=arr[j]:
+                    temp[k]=arr[i]
+                    k+=1
+                    i+=1
+                else:
+                    temp[k]=arr[j]
+                    k+=1
+                    j+=1
+                    cnt+=(mid-i)
+                
+            while i<=mid-1:
+                temp[k]=arr[i]
+                k+=1
+                i+=1
+            while j<=high:
+                temp[k]=arr[j]
+                k+=1
+                j+=1
+            for i in range(low,high+1):
+                arr[i]=temp[i]
+           
+            return cnt
+        
+        def mergesort(arr,temp,low,high):
+            mid=0;cnt=0
+            if low<high:
+                mid=(low+high)//2
+                cnt+=mergesort(arr,temp,low,mid)
+                cnt+=mergesort(arr,temp,mid+1,high)
+                
+                cnt+=merge(arr,temp,low,mid+1,high)
+                
+              
+                
+            return cnt
+        
+        temp=[0]*n
+        ans=mergesort(arr,temp,0,n-1)
+        return ans
