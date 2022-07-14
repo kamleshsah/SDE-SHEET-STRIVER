@@ -1,0 +1,17 @@
+'''
+https://leetcode.com/problems/subsets/
+'''
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        def solve(ind,carry,ans,nums):
+            if ind>=len(nums):
+                ans.append(carry.copy())
+                return   
+            carry.append(nums[ind])
+            solve(ind+1,carry,ans,nums)
+            carry.pop()
+            solve(ind+1,carry,ans,nums)
+            
+        ans=[]
+        solve(0,[],ans,nums)
+        return ans
